@@ -1,7 +1,7 @@
 import express from "express";
 import * as fsP from "fs/promises";
 
-const pathLogger = '../logs/enterServer.txt';
+const pathLogger = process.env.ENTER_SERVER_FILE || '../logs/enterServer.txt'; //האם קולט את המסמך או לא
 
 export default async function logger(req, res, next) {
     const ipC = req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress;
