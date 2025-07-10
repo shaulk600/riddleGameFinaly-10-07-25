@@ -12,7 +12,7 @@ export default async function logger(req, res, next) {
     try {
         const respons = await fsP.readFile(pathLogger, { encoding: 'utf-8' });
         const loggers = respons ? JSON.parse(respons) : [];
-        loggers.push()
+        loggers.push(newLogger);
         await fsP.writeFile(pathLogger, JSON.stringify(loggers,null,2), { encoding: 'utf-8' });
     }
     catch (Err) { console.log(`Error System Logger: `,Err); }
