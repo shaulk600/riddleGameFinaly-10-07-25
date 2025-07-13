@@ -22,3 +22,4 @@ function handleMenuSelection(valueCoice) { // החלק הלוגיקה של - מ�
 
     } 
 }
+

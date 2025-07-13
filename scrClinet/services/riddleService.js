@@ -1,5 +1,11 @@
-// רוב הפונקציות שפה - לבדוק שהכל בסג=דר - ולשלוח ל DAL לעשות
-function addingNewRiddle() {// הוסף חידה חדשה
+import { getInitRiddle } from "../UI/MenuUI.js";
+import {  } from "../dals/riddleDal.js";
+
+// רוב הפונקציות שפה - לבדוק שהכל בסדר - ולשלוח ל DAL לעשות
+export function addingNewRiddle(obj) {// הוסף חידה חדשה
+    const obj = getInitRiddle();
+    //val
+
 
 }
 

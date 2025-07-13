@@ -1,6 +1,7 @@
 //בעמוד זה יש לי -הצגת תפריט- מה השעאלה מה התשובה בהוספת חידה - הצגת שם השחקן(אולי לעשות את זה בקובץ UI player) - ותביא לי ID של חידה
 import { question } from "readline-sync";
 
+
 // show selection menu
 function displayMainMenu() {
     // displayNamePlayer(); // printed "hello {namePlayer}" - אולי יוצג דרך התפריט מנהל עקב כך שהוא צריך את השם שלו - ועדיף על פי השכבות
@@ -25,20 +26,36 @@ export function getMainMenuChoice() {//החזרת ערך הבחירה
     } while (choice < 1 && choice > 6);
     return choice; // יוצא החוצה כ"number"
 }
-
+//new riddle
 // show selection init riddle
 function displayInitRiddleMenu() {
     console.log(" New riddle update : ");
+    const nameA = question("Write the name here: ")
     const questionA = question("Write the question here: ");
     const answerA = question("Write the answer here: ");
-    return { questionA: answerA };
+    const obj = {
+        name: nameA,
+        question: questionA,
+        anser: answerA
+    }
+    return obj;
 }
 // User selection input function init riddle
 export function getInitRiddle() {
     do {
-        const objInitRiddle = displayInitRiddleMenu();
-    } while (! objInitRiddle.questionA && ! objInitRiddle.answerA);
-    return objInitRiddle;
+        const obj = displayInitRiddleMenu();
+    } while (!obj.name && !obj.question && !obj.anser);
+    return obj;
+}
+// id
+function displayIdRiddleMenu() {
+    return parseInt(("What is the ID of the riddle?"));
+}
+export function getIDRiddle() {
+    let id;
+    do {
+        id = displayIdRiddleMenu();
+    } while (typeof id !== Number);
 }
 
 // printed hello {name player}
@@ -48,18 +65,6 @@ export function displayNamePlayer(name) {
 // clear in UI
 export function clearUI() {
     return console.clear();
-}
-
-function displayIDRiddleMenu() {
-    return question("What is the ID of the riddle?");
-}
-export function getIDRiddle() {
-    let id;
-    do {
-        id = displayIDRiddleMenu();
-    } while (typeof id !== Number);
-    //כל עוד שזה true
-    //  זה חוזר ?? לבדוק
 }
 
 
