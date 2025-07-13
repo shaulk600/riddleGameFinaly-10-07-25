@@ -1,6 +1,6 @@
 import { } from "http";
 import { } from "url";
-// פונקציות CRUD to featch!!!
+
 
 const URL = "http://localhost:3000";
 
@@ -32,7 +32,7 @@ export async function getRiddleById(id) {
     });
 }
 
-export async function UpdateRiddleById(id) {
+export async function UpdateRiddleById(id,obj) {
     const response = await fetch(`${URL}/riddles/riddle/update/id=${id}`, {
         headers: {
             'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ export async function deleteRiddleById(id){
         headers: {
             'Content-Type': 'application/json',
         },
-        method: 'PUT',
+        method: 'DELETE',
         body: JSON.stringify(obj) // השאלה אם עדיך ב body או שאפשר כבר בפרמטרים
     });
 }
