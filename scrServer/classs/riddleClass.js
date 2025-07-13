@@ -1,7 +1,7 @@
-let Idnumber = 0;
+import NumProgram from "./NumProgramClass.js";
 export default class Riddle {
     constructor(name, taskDescription = null, correctAnswer = null) {
-        this.id = id;
+        this.id = NumProgram.addRiddle();
         this.name = name;
         taskDescription ? this.taskDescription = taskDescription : null
         correctAnswer ? this.correctAnswer = correctAnswer : null
