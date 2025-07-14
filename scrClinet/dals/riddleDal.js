@@ -13,6 +13,15 @@ export async function getRiddles() {
     });
 }
 
+export async function getRiddleById(id) {
+    const response = await fetch(`${URL}/riddle/get/id=${id}`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'GET',
+    });
+}
+
 export async function initRiddle(obj) {
     const response = await fetch(`${URL}/riddle/post/init`, {
         headers: {
@@ -23,14 +32,7 @@ export async function initRiddle(obj) {
     });
 }
 
-export async function getRiddleById(id) {
-    const response = await fetch(`${URL}/riddle/get/id=${id}`, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        method: 'GET',
-    });
-}
+
 
 export async function UpdateRiddleById(id,obj) {
     const response = await fetch(`${URL}/riddle/update/id=${id}`, {
