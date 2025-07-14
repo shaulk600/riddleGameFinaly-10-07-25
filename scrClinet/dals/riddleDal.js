@@ -5,7 +5,7 @@ import { } from "url";
 const URL = "http://localhost:3000";
 
 export async function getRiddles() {
-    const response = await fetch(`${URL}/riddle/all`, {
+    const response = await fetch(`${URL}/riddle/get/all`, {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -14,7 +14,7 @@ export async function getRiddles() {
 }
 
 export async function initRiddle(obj) {
-    const response = await fetch(`${URL}/riddle/init`, {
+    const response = await fetch(`${URL}/riddle/post/init`, {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -24,7 +24,7 @@ export async function initRiddle(obj) {
 }
 
 export async function getRiddleById(id) {
-    const response = await fetch(`${URL}/riddle/id=${id}`, {
+    const response = await fetch(`${URL}/riddle/get/id=${id}`, {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -33,7 +33,7 @@ export async function getRiddleById(id) {
 }
 
 export async function UpdateRiddleById(id,obj) {
-    const response = await fetch(`${URL}/riddles/riddle/update/id=${id}`, {
+    const response = await fetch(`${URL}/riddle/update/id=${id}`, {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -43,7 +43,7 @@ export async function UpdateRiddleById(id,obj) {
 }  
 
 export async function deleteRiddleById(id){
-    const response = await fetch(`${URL}/riddles/riddle/delete/id=${id}`, {
+    const response = await fetch(`${URL}/riddle/delete/id=${id}`, {
         headers: {
             'Content-Type': 'application/json',
         },
