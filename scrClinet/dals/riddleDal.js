@@ -1,2 +1,53 @@
+import { } from "http";
+import { } from "url";
 
-// פונקציות CRUD to featch!!!
+
+const URL = "http://localhost:3000";
+
+export async function getRiddles() {
+    const response = await fetch(`${URL}/riddle/get/all`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'GET',
+    });
+}
+
+export async function initRiddle(obj) {
+    const response = await fetch(`${URL}/riddle/post/init`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(obj)
+    });
+}
+
+export async function getRiddleById(id) {
+    const response = await fetch(`${URL}/riddle/get/id=${id}`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'GET',
+    });
+}
+
+export async function UpdateRiddleById(id,obj) {
+    const response = await fetch(`${URL}/riddle/update/id=${id}`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'PUT',
+        body: JSON.stringify(obj) // השאלה אם עדיך ב body או שאפשר כבר בפרמטרים
+    });
+}  
+
+export async function deleteRiddleById(id){
+    const response = await fetch(`${URL}/riddle/delete/id=${id}`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'DELETE',
+        body: JSON.stringify(obj) // השאלה אם עדיך ב body או שאפשר כבר בפרמטרים
+    });
+}

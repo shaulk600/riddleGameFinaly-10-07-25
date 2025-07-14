@@ -5,6 +5,10 @@ function handleMenuSelection(){ //טיפול בבחירת המשתמש מהתפ�
 }
 
 function displayMainMenu(){ // הצגת התפריט הראשי
+    
+}
+
+async function playGame(){
 
 }
 
