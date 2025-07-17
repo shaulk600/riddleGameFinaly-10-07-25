@@ -2,7 +2,7 @@ import NumProgram from "./NumProgramClass.js";
 export default class Riddle {
     constructor(name, taskDescription = null, correctAnswer = null) {
         this.id = NumProgram.addRiddle();
-        this.name = name;
+        this.name = name; //להעביר אל title - החדש מעודכן
         taskDescription ? this.taskDescription = taskDescription : null
         correctAnswer ? this.correctAnswer = correctAnswer : null
     }

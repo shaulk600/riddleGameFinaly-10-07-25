@@ -1,0 +1,1 @@
+import { RiddleO } from "../classs/classForCloudeDB/playerObjClass.js";
