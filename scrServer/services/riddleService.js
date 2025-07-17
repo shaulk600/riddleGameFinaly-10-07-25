@@ -5,11 +5,10 @@
 import { getAllRiddleD, getRiddleByIdD, initRiddleOneD, updateRiddleByIdD, deleteRiddleByIdD } from "../dalCloudDBs/riddleDalMongo.js";
 import { RiddleO } from "../classs/classForCloudeDB/riddleObjClass.js";
 
+
 export async function getAllRiddleS() {
     try {
-        const data = await getAllRiddleD();
-        const newObj = new RiddleO(data)
-        return newObj;
+        return await getAllRiddleD();
     }
     catch (Err) {
         console.log('Err Server: --  file: riddleService -- function getAllRiddleByS = ', Err);
@@ -68,4 +67,32 @@ export async function deleteRiddleByIdS(id) {
         console.log('Err Server: --  file: riddleService -- function deleteRiddleByIdS = ', Err);
         return null;
     }
+}
+
+
+export async function getRandRiddleS() {
+    const response = await getAllRiddleWithArrObjS();
+    if (!response || response.length === 0) return null;
+    const num = Math.floor(Math.random(0) * response.length);
+    return response[num];
+}
+
+export async function getAllRiddleWithArrObjS() {
+    try {
+        const data = await getAllRiddleD();
+        const newArr = [];
+        for (let i = 0; i < data.length; i++) {
+            newArr.push(createObjToArrS(data[i]));
+        }
+        return newArr;
+    }
+    catch (Err) {
+        console.log('Err Server: --  file: riddleService -- function getAllRiddleWithArrObjS = ', Err);
+        return null;
+    }
+}
+
+export function createObjToArrS(data) {
+    const newObj = new RiddleO(data);
+    return newObj;
 }
