@@ -1,7 +1,7 @@
 //בעמוד זה יש לי -הצגת תפריט- מה השעאלה מה התשובה בהוספת חידה - הצגת שם השחקן(אולי לעשות את זה בקובץ UI player) - ותביא לי ID של חידה
 import { question } from "readline-sync";
 
-
+//menu
 // show selection menu
 function displayMainMenu() {
     // displayNamePlayer(); // printed "hello {namePlayer}" - אולי יוצג דרך התפריט מנהל עקב כך שהוא צריך את השם שלו - ועדיף על פי השכבות
@@ -26,7 +26,18 @@ export function getMainMenuChoice() {//החזרת ערך הבחירה
     } while (choice < 1 && choice > 6);
     return choice; // יוצא החוצה כ"number"
 }
-//new riddle
+
+// printed hello {name player}
+export function displayNamePlayer(name) {
+    console.log(` ${name ? `   hello ${name}   ` : `   hello player 1   `} `)
+}
+// clear in UI
+export function clearUI() {
+    return console.clear();
+}
+
+
+//riddle
 // show selection init riddle
 function displayInitRiddleMenu() {
     console.log(" New riddle update : ");
@@ -49,7 +60,7 @@ export function getInitRiddle() {
 }
 // id
 function displayIdRiddleMenu() {
-    return parseInt(("What is the ID of the riddle?"));
+    return parseInt(question("What is the ID of the riddle?"));
 }
 export function getIDRiddle() {
     let id;
@@ -58,13 +69,15 @@ export function getIDRiddle() {
     } while (typeof id !== Number);
 }
 
-// printed hello {name player}
-export function displayNamePlayer(name) {
-    console.log(` ${name ? `   hello ${name}   ` : `   hello player 1   `} `)
+//player
+function displayNamePlayerMenu() {
+    return (question("What is the Name of you?"));
 }
-// clear in UI
-export function clearUI() {
-    return console.clear();
+export function getNamePlayer() {
+    let name;
+    do {
+        id = displayNamePlayerMenu();
+    } while (typeof id !== Number);
 }
 
 

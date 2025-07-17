@@ -1,4 +1,14 @@
-import { createRiddleDB, getAllRiddle, getRiddleById, updateRiddleById, deleteRiddleById } from "../dals/riddleDal.js"; 
-import Riddle from "../classs/riddleClass.js";
+import {  } from "../services/riddleService.js";
 
-// export 
+export function getAllRiddle(req,res){
+
+} 
+export function getRiddleByID(req,res){
+
+} 
+export function initRiddle(req,res){
+
+} 
+export function getRiddleByID(req,res){
+
+} 
