@@ -1,31 +1,31 @@
 import { getInitRiddle } from "../UI/MenuUI.js";
 import {  } from "../dals/riddleDal.js";
 
-// רוב הפונקציות שפה - לבדוק שהכל בסדר - ולשלוח ל DAL לעשות
-export function addingNewRiddle(obj) {// הוסף חידה חדשה
+
+export function initRiddle(obj) {// הוסף חידה חדשה
     const obj = getInitRiddle();
     //val
-
-
 }
 
-function readAllRiddle() { // לקרוא את כל החידות
-
+export function getAllRiddle() { // לקרוא את כל החידות
 
 }
-
-function updateRiddleIfExistById() {
-    // צריך ליצור מתודת הדפסה של "תביא לי ID"
+export function getRiddleByID(id) { 
+    //לקרוא למתודה תביא ID
+}
+export function updateRiddle() {
+    //לקרוא למתודה תביא ID
+    
 }
 
-function deleteRiddleIfExist() {
-    // צריך ליצור מתודת הדפסה של "תביא לי ID"
+export function deleteRiddle() {
+    //לקרוא למתודה תביא ID
 }
 
-//נשאר לי 2 בCRUD שבשאלה 2
 
 
 
+//שונות
 //2 אלה צריכים לעבור לשרת
 function validRiddleObj(riddel) {
     if (riddel.id && riddel.name && riddel.taskDescription && riddel.correctAnswer) { //אם צריך את name ?
