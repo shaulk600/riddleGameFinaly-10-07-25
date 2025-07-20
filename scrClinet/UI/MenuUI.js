@@ -41,11 +41,11 @@ export function clearUI() {
 // show selection init riddle
 function displayInitRiddleMenu() {
     console.log(" New riddle update : ");
-    const nameA = question("Write the name here: ")
+    const titleA = question("Write the title here: ")
     const questionA = question("Write the question here: ");
     const answerA = question("Write the answer here: ");
     const obj = {
-        name: nameA,
+        title: titleA,
         question: questionA,
         anser: answerA
     }
@@ -55,9 +55,11 @@ function displayInitRiddleMenu() {
 export function getInitRiddle() {
     do {
         const obj = displayInitRiddleMenu();
-    } while (!obj.name && !obj.question && !obj.anser);
+    } while (!obj.title && !obj.question && !obj.anser);
     return obj;
 }
+
+
 // id
 function displayIdRiddleMenu() {
     return parseInt(question("What is the ID of the riddle?"));
@@ -69,17 +71,25 @@ export function getIDRiddle() {
     } while (typeof id !== Number);
 }
 
+
 //player
 function displayNamePlayerMenu() {
-    return (question("What is the Name of you?"));
+    return (question("What is the Name player of you?"));
 }
+
 export function getNamePlayer() {
     let name;
     do {
-        id = displayNamePlayerMenu();
-    } while (typeof id !== Number);
+        name = displayNamePlayerMenu();
+    } while (name === '');
 }
 
+export function makeAnotherRound() {
+    const p = (question(" make another round ? (y/n) "));
+    if (p === 'y') { return true; }
+    else if (p === 'n') { return false; }
+    else { return makeAnotherRound() }
+}
 
 
 

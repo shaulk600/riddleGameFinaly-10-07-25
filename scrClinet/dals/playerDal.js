@@ -1,5 +1,7 @@
-
+//כרגע !! להריץ הכל על פורט 3000
+// כרגי יש לשנות את הריצה של עידכון ומחיקה
 const URL = "http://localhost:3000";
+
 
 export async function searchIfPlayerExist(name) { // בודק אם קיים שחקן במאגר
     try {
@@ -9,30 +11,44 @@ export async function searchIfPlayerExist(name) { // בודק אם קיים שח
             },
             method: 'GET'
         });
-        console.log(typeof response); // לבדוק אם הוא json or text
-        return response;
+        const data = await response.json();
+        if (response.status === 201) {
+            return data;
+        }
+        else {
+            console.log('Error = STATUS');
+            return null;
+        }
     } catch (Err) {
-        console.log('Error: playerDal.js - searchIfPlayerExist: ', Err);
+        console.log('Error:  file: playerDal.js  -- function: searchIfPlayerExist: ', Err);
         return null;
     }
 }
 
-export async function getPlayerData(id) { // מביא נתוני שחקן במאגר
+//לערוך את זה שיוציא גם שחקן ועוד מתודה להוציא את ציוניו - שיעשו חיפוש בשרת על השחקן - לא כאן
+export async function getPlayerData(id) { // מביא נתוני שחקן במאגר - מתוכם להוציא average and sum
     try {
-        const response = await fetch(`${URL}/player/get/playerData/${id}`, { //obj = ID/name
+        const response = await fetch(`${URL}/player/get/playerData/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
             method: 'GET',
         });
-        return response;
+        const data = await response.json();
+        if (response.status === 201) {
+            return data;
+        }
+        else {
+            console.log('Error = STATUS');
+            return null;
+        }
     } catch (Err) {
-        console.log('Error: playerDal.js - getPlayerData: ', Err);
+        console.log('Error: file: playerDal.js  -- function: getPlayerData: ', Err);
         return null;
     }
 }
 
-export async function initPlayer(obj) { //יוצר שחקן = obj = name , ?מה עוד
+export async function initPlayerD(obj) { //יוצר שחקן = obj = name , את כל הייתר ליצור בשרת
     try {
         const response = await fetch(`${URL}/player/post/init`, {
             headers: {
@@ -41,13 +57,21 @@ export async function initPlayer(obj) { //יוצר שחקן = obj = name , ?מה
             method: 'POST',
             body: JSON.stringify(obj)
         });
-        return response;
+        const data = await response.json();
+        if (response.status === 201) {
+            return data;
+        }
+        else {
+            console.log('Error = STATUS');
+            return null;
+        }
     } catch (Err) {
-        console.log('Error: playerDal.js - initPlayer: ', Err);
+        console.log('Error: file: playerDal.js  -- function: initPlayer: ', Err);
         return null;
     }
 }
 
+// יש צורך בעריכה
 export async function updatePlayerData(id, obj) { // בסוף כל שאלה- זה ישלח ובו ציוני השעה וכדומה 
     try {
         const response = await fetch(`${URL}/player/update/playerDataDate/${id}`, {
@@ -57,6 +81,14 @@ export async function updatePlayerData(id, obj) { // בסוף כל שאלה- ז�
             method: 'PUT',
             body: JSON.stringify(obj)
         });
+        const data = await response.json();
+        if (response.status === 201) {
+            return data;
+        }
+        else {
+            console.log('Error = STATUS');
+            return null;
+        }
     } catch (Err) {
         console.log('Error: playerDal.js - updatePlayerData: ', Err);
         return null;
@@ -71,7 +103,14 @@ export async function deletePlayer(id) { // מוחק שחקן עפ"י ID
             },
             method: 'DELETE',
         });
-        return response; // מחזיר את פרטי השחקן
+        const data = await response.json();
+        if (response.status === 201) {
+            return data;
+        }
+        else {
+            console.log('Error = STATUS');
+            return null;
+        }
     } catch (Err) {
         console.log('Error: playerDal.js - deletePlayer: ', Err);
         return null;

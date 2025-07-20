@@ -1,17 +1,18 @@
-import { getNamePlayer } from "../UI/MenuUI.js";
+import { getNamePlayer , makeAnotherRound } from "../UI/MenuUI.js";
 
-function handleMenuSelection(){ //טיפול בבחירת המשתמש מהתפריט
+import { handleMenuSelection } from "../services/menuService.js";
 
-}
 
-function displayMainMenu(){ // הצגת התפריט הראשי
-    
-}
 
-async function playGame(){
+export async function playGame() {
     const name = getNamePlayer();
-    //יציאה אל סרויס קבלת name ובדיקתו
+    const obj = await handleMenuSelection(name);
     
-
+    //האם תרצה עוד סיבוב - חזרה בלופ
+    let flag = true;
+    while (flag) {
+        const obj = await handleMenuSelection(name , obj); // obj = player
+        flag = makeAnotherRound();
+    }
 }
 

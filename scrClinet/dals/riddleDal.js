@@ -9,7 +9,14 @@ export async function getRiddles() {
             },
             method: 'GET',
         });
-        return response;
+        const data = await response.json();
+        if (response.status === 200) {
+            return data;
+        }
+        else {
+            console.log('Error = STATUS');
+            return null;
+        }
     } catch (Err) {
         console.log('Error: riddleDal.js - getRiddles: ', Err);
         return null;
@@ -24,7 +31,14 @@ export async function getRiddleById(id) {
             },
             method: 'GET',
         });
-        return response;
+        const data = await response.json();
+        if (response.status === 200) {   
+            return data;
+        }
+        else {
+            console.log('Error = STATUS');
+            return null;
+        }
     } catch (Err) {
         console.log('Error: riddleDal.js - getRiddleById: ', Err);
         return null;
@@ -40,7 +54,14 @@ export async function initRiddle(obj) {
             method: 'POST',
             body: JSON.stringify(obj)
         });
-        return response;
+        const data = await response.json();
+        if (response.status === 200) {   
+            return data;
+        }
+        else {
+            console.log('Error = STATUS');
+            return null;
+        }
     } catch (Err) {
         console.log('Error: riddleDal.js - initRiddle: ', Err);
         return null;
@@ -54,9 +75,16 @@ export async function UpdateRiddleById(id, obj) {
                 'Content-Type': 'application/json',
             },
             method: 'PUT',
-            body: JSON.stringify(obj) // השאלה אם עדיך ב body או שאפשר כבר בפרמטרים
+            body: JSON.stringify(obj)
         });
-        return response;
+        const data = await response.json();
+        if (response.status === 200) {   
+            return data;
+        }
+        else {
+            console.log('Error = STATUS');
+            return null;
+        }
     } catch (Err) {
         console.log('Error: riddleDal.js - UpdateRiddleById: ', Err);
         return null;
@@ -71,7 +99,14 @@ export async function deleteRiddleById(id) {
             },
             method: 'DELETE',
         });
-        return response;
+        const data = await response.json();
+        if (response.status === 200) {   
+            return data;
+        }
+        else {
+            console.log('Error = STATUS');
+            return null;
+        }
     } catch (Err) {
         console.log('Error: riddleDal.js - getRiddles: ', Err);
         return null;
@@ -86,7 +121,14 @@ export async function randomRiddle() { //צריך את זה ??
             },
             method: 'GET',
         });
-        return response;
+        const data = await response.json();
+        if (response.status === 200) {   
+            return data;
+        }
+        else {
+            console.log('Error = STATUS');
+            return null;
+        }
     } catch (Err) {
         console.log('Error: riddleDal.js - randomRiddle: ', Err);
         return null;
