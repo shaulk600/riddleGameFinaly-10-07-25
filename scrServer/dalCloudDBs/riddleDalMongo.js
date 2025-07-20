@@ -15,7 +15,7 @@ export async function getAllRiddleD() {
     }
     catch (Err) {
         console.log('Err Server: --  file: riddleDalMongo -- function getAllRiddleD = ', Err);
-        res.sendStatus(500);
+        return null;
     }
 }
 
@@ -29,7 +29,7 @@ export async function getRiddleByIdD(id) {
     }
     catch (Err) {
         console.log('Err Server: --  file: riddleDalMongo -- function getRiddleByIdD = ', Err);
-        res.sendStatus(500);
+        return null;
     }
 }
 
@@ -41,7 +41,7 @@ export async function initRiddleOneD(obj) {
     }
     catch (Err) {
         console.log('Err Server: --  file: riddleDalMongo -- function initRiddleOneD = ', Err);
-        res.sendStatus(500);
+        return null;
     }
 }
 
@@ -53,14 +53,14 @@ export async function updateRiddleByIdD(id, obj) {
             Object.entries(obj).filter(([_, value]) => value !== null && value !== undefined)
         );
         return await db.collection(collectionName)
-            .updateOne(
+            .updateOne( 
                 { _id: new ObjectId(id) }, // if Id=object.id to browser
                 { $set: filteredObj },
             );
     }
     catch (Err) {
         console.log('Err Server: --  file: riddleDalMongo -- function updateRiddleByIdD = ', Err);
-        res.sendStatus(500);
+        return null;
     }
 }
 
@@ -74,12 +74,12 @@ export async function deleteRiddleByIdD(id) {
     }
     catch (Err) {
         console.log('Err Server: --  file: riddleDalMongo -- function deleteRiddleByIdD = ', Err);
-        res.sendStatus(500);
+        return null;
     }
 }
 
 
-
+//תוספות
 // export async function getHighReportsD() {
 //     try {
 //         const db = await connect();
@@ -96,3 +96,8 @@ export async function deleteRiddleByIdD(id) {
 //     }
 // }
 
+
+// //חיפוש ערך אם שווה למה שהבאת לו
+// const adults = await db.collection('users')
+//     .find({ name: { $eq: name='שם משתנה נוכחי' } })
+//     .toArray();
