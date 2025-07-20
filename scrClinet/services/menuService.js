@@ -1,6 +1,7 @@
-import { getMainMenuChoice, displayNamePlayer, clearUI } from "../UI/MenuUI.js";
+import { question } from "readline-sync";
+import { getMainMenuChoice, displayNamePlayer, clearUI   } from "../UI/MenuUI.js";
 
-import { searchNamePlayer, initPlayer , game_UpdateTimeInPlayer } from "./playerService.js";
+import { searchNamePlayer, initPlayer, game_UpdateTimeInPlayer } from "./playerService.js";
 import { getRiddleRandom } from "./riddleService.js";
 
 // מקושר אל programManager
@@ -26,7 +27,7 @@ export async function handleMenuSelection(namePlayer, obj = null) {
     displayNamePlayer(namePlayer); // מציג את השם
     const valueCoice = getMainMenuChoice(); // בחר מהתפריט
     if (valueCoice !== Number) { return null }
-    
+
     switch (valueCoice) {
         case "1":
             break;
@@ -65,9 +66,3 @@ export async function NamePlayer(name) {
 }
 
 
-
-export async function randomGame(id_player){
-    const data = getRiddleRandom();
-    game_UpdateTimeInPlayer(id_player,data.idRiddle, ask);
-
-}

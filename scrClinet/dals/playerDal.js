@@ -3,7 +3,7 @@
 const URL = "http://localhost:3000";
 
 
-export async function searchIfPlayerExist(name) { // בודק אם קיים שחקן במאגר
+export async function searchIfPlayerExistD(name) { // בודק אם קיים שחקן במאגר
     try {
         const response = await fetch(`${URL}/player/get/playerExist/${name}`, {
             headers: {
@@ -26,7 +26,7 @@ export async function searchIfPlayerExist(name) { // בודק אם קיים שח
 }
 
 //לערוך את זה שיוציא גם שחקן ועוד מתודה להוציא את ציוניו - שיעשו חיפוש בשרת על השחקן - לא כאן
-export async function getPlayerData(id) { // מביא נתוני שחקן במאגר - מתוכם להוציא average and sum
+export async function getPlayerDataD(id) { // מביא נתוני שחקן במאגר - מתוכם להוציא average and sum
     try {
         const response = await fetch(`${URL}/player/get/playerData/${id}`, {
             headers: {
@@ -72,7 +72,7 @@ export async function initPlayerD(obj) { //יוצר שחקן = obj = name , את
 }
 
 // יש צורך בעריכה
-export async function updatePlayerData(id, obj) { // בסוף כל שאלה- זה ישלח ובו ציוני השעה וכדומה 
+export async function updatePlayerDataD(id, obj) { // בסוף כל שאלה- זה ישלח ובו ציוני השעה וכדומה 
     try {
         const response = await fetch(`${URL}/player/update/playerDataDate/${id}`, {
             headers: {
@@ -95,7 +95,7 @@ export async function updatePlayerData(id, obj) { // בסוף כל שאלה- ז�
     }
 }
 
-export async function deletePlayer(id) { // מוחק שחקן עפ"י ID
+export async function deletePlayerD(id) { // מוחק שחקן עפ"י ID
     try {
         const response = await fetch(`${URL}/player/delete/allPlayer/${id}`, {
             headers: {

@@ -1,33 +1,27 @@
-import { getInitRiddle } from "../UI/MenuUI.js"; // זה לא צריך להיות פה
-import { getRiddles, getRiddleById, initRiddle, UpdateRiddleById, deleteRiddleById, randomRiddle } from "../dals/riddleDal.js";
+import { getInitRiddle, getIDRiddle, } from "../UI/MenuUI.js"; //רק מתודות של הכנסת Id or create riddle
+import { getAllRiddlesD, getRiddleByIdD, initRiddleD, updateRiddleByIdD, deleteRiddleByIdD, randomRiddleD } from "../dals/riddleDal.js";
 
 // import { updateTimeInPlayer } from "./playerService.js"; // החיבור הזה דרך השלישי -  לא פה
 
-export async function getRiddleRandom(){
-    const data = await randomRiddle();
-    if(data.idRiddle && data.title && data.question && data.anser ){
-        return data;
+export async function getRiddleRandomS() {
+    try {
+        return data = await randomRiddleD();
+    } catch (Err) {
+        console.log('', Err);
     }
-    else{
-        return null;
-    }
-
-
-    // await updateTimeInPlayer(id_player ,)
 }
 
-
-export async function initRiddle(obj) {// הוסף חידה חדשה
+export async function initRiddleS() {
     try {
-        const objR = getInitRiddle();
-        const data = await initRiddle(objR);
+        const obj = getInitRiddle();
+        const data = await initRiddleD(obj);
         if (!data) {
-            console.log('create riddle not seccess. ');
-            return null;
+            console.log('not created');
         }
         else {
-            console.log('create riddle seccess... ');
-            return data['id']; // צריך את הID????
+            console.log('created is seccess !!');
+            // console.log(data);
+            // return data;
         }
     } catch (Err) {
         console.log('Error: riddleService.js - initRiddle: ', Err);
@@ -35,26 +29,68 @@ export async function initRiddle(obj) {// הוסף חידה חדשה
     }
 }
 
-export function getAllRiddle() { // לקרוא את כל החידות
+export async function getAllRiddlesS() { 
+    try {
+        const data = await getAllRiddlesD();
+        if (!data) {
+            console.log('not geted');
+        }
+        else {
+            console.log('geted is seccess !!');
+            console.log(data);
+            return data;
+        }
+    } catch (Err) {
+        console.log('Error: - file: riddleService  --  function: getAllRiddlesS ', Err);
+    }
+}
 
-}
-export function getRiddleByID(id) {
-    //לקרוא למתודה תביא ID
-}
-export function updateRiddle() {
-    //לקרוא למתודה תביא ID
-
-}
-
-export function deleteRiddle() {
-    //לקרוא למתודה תביא ID
+export function getRiddleByIdS() {
+    try {
+        const id = getIDRiddle();
+        return await getRiddleByIdD(id);
+    } catch (Err) {
+        console.log('Error: - file: riddleService  --  function: getRiddleByIdS ', Err);
+    }
 }
 
-//זה צריך להיות ב UI ??
-export async function ask(objRiddle){
-    console.log(objRiddle.question); 
-    // if()
+export function updateRiddleByIdS() {
+    try {
+        const id = getIDRiddle();
+        const obj = getInitRiddle();
+        const data = await updateRiddleByIdD(id, obj);
+        if (!data) {
+            console.log('not updated');
+        }
+        else {
+            console.log('updated is seccess !!');
+        }
+    } catch (Err) {
+        console.log('Error: - file: riddleService  --  function: updateRiddleByIdS ', Err);
+    }
 }
+
+
+export function deleteRiddleByIdS() {
+    try {
+        const id = getIDRiddle();
+        const data = await deleteRiddleByIdD(id);
+        if (!data) {
+            console.log('not deleted');
+        }
+        else {
+            console.log('delete is seccess !!');
+        }
+    } catch (Err) {
+        console.log('Error: - file: riddleService  --  function: deleteRiddleByIdS ', Err);
+    }
+}
+
+
+
+
+
+
 
 
 // //שונות
