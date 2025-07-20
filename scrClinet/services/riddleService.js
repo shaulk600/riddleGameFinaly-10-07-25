@@ -1,5 +1,5 @@
 import { getInitRiddle, getIDRiddle, } from "../UI/MenuUI.js"; //רק מתודות של הכנסת Id or create riddle
-import { getAllRiddlesD, getRiddleByIdD, initRiddleD, updateRiddleByIdD, deleteRiddleByIdD, randomRiddleD } from "../dals/riddleDal.js";
+import { getAllRiddlesD, getRiddleByIdD, initRiddleD, UpdateRiddleByIdD, deleteRiddleByIdD, randomRiddleD } from "../dals/riddleDal.js";
 
 // import { updateTimeInPlayer } from "./playerService.js"; // החיבור הזה דרך השלישי -  לא פה
 
@@ -7,7 +7,7 @@ export async function getRiddleRandomS() {
     try {
         return data = await randomRiddleD();
     } catch (Err) {
-        console.log('', Err);
+        console.log('Error: - file: riddleService  --  function: getRiddleRandomS ', Err);
     }
 }
 
@@ -24,7 +24,7 @@ export async function initRiddleS() {
             // return data;
         }
     } catch (Err) {
-        console.log('Error: riddleService.js - initRiddle: ', Err);
+        console.log('Error: - file: riddleService  --  function: initRiddleS ', Err);
         return null;
     }
 }
@@ -45,7 +45,7 @@ export async function getAllRiddlesS() {
     }
 }
 
-export function getRiddleByIdS() {
+export async function getRiddleByIdS() {
     try {
         const id = getIDRiddle();
         return await getRiddleByIdD(id);
@@ -54,11 +54,11 @@ export function getRiddleByIdS() {
     }
 }
 
-export function updateRiddleByIdS() {
+export async function updateRiddleByIdS() {
     try {
         const id = getIDRiddle();
         const obj = getInitRiddle();
-        const data = await updateRiddleByIdD(id, obj);
+        const data = await UpdateRiddleByIdD(id, obj);
         if (!data) {
             console.log('not updated');
         }
@@ -71,7 +71,7 @@ export function updateRiddleByIdS() {
 }
 
 
-export function deleteRiddleByIdS() {
+export async function deleteRiddleByIdS() {
     try {
         const id = getIDRiddle();
         const data = await deleteRiddleByIdD(id);

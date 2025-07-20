@@ -1,11 +1,12 @@
 import {updateTinePlayer } from "../services/playerService.js";
 
+import { ask } from "./flowGameRiddle.js";
 
 //לערוך גם את זה - ערוך
 export async function game_UpdateTimeInPlayer(idPlayer, objRiddle, cb) {
     try {
         const start = returnTime();
-        cb();
+        cb(objRiddle);
         const end = returnTime();
 
         const obj = {
@@ -16,8 +17,8 @@ export async function game_UpdateTimeInPlayer(idPlayer, objRiddle, cb) {
         }
 
         const data = await updateTinePlayer(idPlayer, obj);
-        return data;
-
+        // return data;
+        return;
     } catch (Err) {
         console.log('file: Util/time.js  --  function: game_UpdateTimeInPlayer', Err);
         return null;

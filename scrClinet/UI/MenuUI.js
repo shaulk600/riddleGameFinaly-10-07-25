@@ -41,7 +41,7 @@ export function clearUI() {
 // show selection init riddle
 function displayInitRiddleMenu() {
     console.log(" New riddle update : ");
-    const titleA = question("Write the title here: ")
+    const titleA = question("Write the title here: ");
     const questionA = question("Write the question here: ");
     const answerA = question("Write the answer here: ");
     const obj = {

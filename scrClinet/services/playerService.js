@@ -52,7 +52,7 @@ export async function initPlayerS(name) {
 
 export async function updateTinePlayerS(id_player, obj) {
     try {
-        return await updatePlayerDataD(obj);
+        return await updatePlayerDataD(id_player, obj);
     } catch (Err) {
         console.log(' file: playerService  --  function: updateTinePlayerS', Err);
         return null;

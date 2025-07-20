@@ -1,16 +1,15 @@
 import { question } from "readline-sync";
-import {  } from "../services/playerService.js";
-import { getRiddleRandom } from "../services/riddleService.js";
+import { } from "../services/playerService.js";
+import { getRiddleRandomS } from "../services/riddleService.js";
 import { game_UpdateTimeInPlayer } from "./time.js";
 
 export async function randomGame(id_player) {
     try {
-
-        const dataRiddle = await getRiddleRandom();
+        const dataRiddle = await getRiddleRandomS();
         await game_UpdateTimeInPlayer(id_player, dataRiddle, ask);
-
+        return;
     } catch (Err) {
-
+        console.log(`Error:  file: Flow game Riddle  --  function:  randomGame `, Err);
     }
 
 }

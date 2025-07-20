@@ -1,15 +1,17 @@
 import { question } from "readline-sync";
-import { getMainMenuChoice, displayNamePlayer, clearUI   } from "../UI/MenuUI.js";
+import { getMainMenuChoice, displayNamePlayer, clearUI } from "../UI/MenuUI.js";
 
-import { searchNamePlayer, initPlayer, game_UpdateTimeInPlayer } from "./playerService.js";
-import { getRiddleRandom } from "./riddleService.js";
+import { searchNamePlayer, initPlayerS } from "./playerService.js";
+import { getRiddleRandom, initRiddleS, getAllRiddlesS , updateRiddleByIdS , deleteRiddleByIdS} from "./riddleService.js";
 
+import { randomGame } from "../util/flowGameRiddle.js";
 // מקושר אל programManager
 
 // הוא זה שמקשר בין ה UI לבין ה service 
 
 // בחירה מהתפריט
-export async function handleMenuSelection(namePlayer, obj = null) {
+export async function handleMenuSelection(namePlayer = null, obj = null) {
+
     // בדיקת שחקן ואם לא - יצירה
     if (!obj) {
         obj = await NamePlayer(namePlayer);
@@ -30,20 +32,35 @@ export async function handleMenuSelection(namePlayer, obj = null) {
 
     switch (valueCoice) {
         case "1":
+            await randomGame()
             break;
+
         case "2":
+            await initRiddleS();
             break;
+
         case "3":
+            const dataGetAll = await getAllRiddlesS();
+            console.log(dataGetAll);
             break;
-        case "4":
+        
+            case "4":
+                const dataUpdate = await updateRiddleByIdS();
+                console.log(dataUpdate);
             break;
-        case "5":
+        
+            case "5":
+                const dataDelete = deleteRiddleByIdS()
             break;
+
         case "6":
+                //לעשות " טבלת מובילים " של השחקנים
             break;
+
         default:
             break;
     }
+    
     //מתודה שאמורה לעדכן את השעות של השחקן - במידה והיו - או בסיום 1
 }
 
