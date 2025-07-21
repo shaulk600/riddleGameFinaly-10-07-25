@@ -1,10 +1,8 @@
-//בעמוד זה יש לי -הצגת תפריט- מה השעאלה מה התשובה בהוספת חידה - הצגת שם השחקן(אולי לעשות את זה בקובץ UI player) - ותביא לי ID של חידה
 import { question } from "readline-sync";
 
 //menu
 // show selection menu
 function displayMainMenu() {
-    // displayNamePlayer(); // printed "hello {namePlayer}" - אולי יוצג דרך התפריט מנהל עקב כך שהוא צריך את השם שלו - ועדיף על פי השכבות
     console.log("  What do you want to do?    ");
     console.log(" 1. Play the game              ");
     console.log(" 2. Create a new riddle        ");
@@ -12,22 +10,18 @@ function displayMainMenu() {
     console.log(" 4. Update an existing riddle  ");
     console.log(" 5. Delete a riddle            ");
     console.log(" 6. View leaderboard           ");
-    return parseInt(question(" Enter the selection number : ")); //converting to Int from String
-
-    //הוולידציה אם הגיע ערך תהיה בפונקציית הלוגיקה 
-    //יהיה עוד םונקצייה שתפקידה יהיה לבדוק אם הגיע ערך ואם הוא תואם - שיופנה אליו אחרי ההפנייה לפה 
-    // - כולם מופנים ע"י programManager
+    return parseInt(question(" Enter the selection number : ")); //converting a number
 }
 // User selection input function Main menu
-export function getMainMenuChoice() {//החזרת ערך הבחירה
+export function getMainMenuChoice() {
     let choice;
     do {
         choice = displayMainMenu();
     } while (choice < 1 && choice > 6);
-    return choice; // יוצא החוצה כ"number"
+    return choice; //number
 }
 
-// printed hello {name player}
+// printed hello {name player} / player1 if not name player
 export function displayNamePlayer(name) {
     console.log(` ${name ? `   hello ${name}   ` : `   hello player 1   `} `)
 }
@@ -37,7 +31,8 @@ export function clearUI() {
 }
 
 
-//riddle
+//riddle function
+
 // show selection init riddle
 function displayInitRiddleMenu() {
     console.log(" New riddle update : ");
@@ -51,6 +46,7 @@ function displayInitRiddleMenu() {
     }
     return obj;
 }
+
 // User selection input function init riddle
 export function getInitRiddle() {
     do {
@@ -60,10 +56,11 @@ export function getInitRiddle() {
 }
 
 
-// id
+// show selection id from riddle
 function displayIdRiddleMenu() {
     return parseInt(question("What is the ID of the riddle?"));
 }
+// User selection input function id riddle
 export function getIDRiddle() {
     let id;
     do {
@@ -72,18 +69,18 @@ export function getIDRiddle() {
 }
 
 
-//player
+//player function
+// show selection name from player
 function displayNamePlayerMenu() {
     return (question("What is the Name player of you?"));
 }
-
 export function getNamePlayer() {
     let name;
     do {
         name = displayNamePlayerMenu();
     } while (name === '');
 }
-
+// show selection if make another round
 export function makeAnotherRound() {
     const p = (question(" make another round ? (y/n) "));
     if (p === 'y') { return true; }
