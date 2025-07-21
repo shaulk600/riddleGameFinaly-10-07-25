@@ -1,8 +1,8 @@
 import { question } from "readline-sync";
 import { getMainMenuChoice, displayNamePlayer, clearUI } from "../UI/MenuUI.js";
 
-import { searchNamePlayer, initPlayerS } from "./playerService.js";
-import { getRiddleRandom, initRiddleS, getAllRiddlesS, updateRiddleByIdS, deleteRiddleByIdS } from "./riddleService.js";
+import { searchNamePlayerS, initPlayerS } from "./playerService.js";
+import { getRiddleRandomS, initRiddleS, getAllRiddlesS, updateRiddleByIdS, deleteRiddleByIdS } from "./riddleService.js";
 
 import { randomGame } from "../util/flowGameRiddle.js";
 // מקושר אל programManager
@@ -10,7 +10,7 @@ import { randomGame } from "../util/flowGameRiddle.js";
 // הוא זה שמקשר בין ה UI לבין ה service 
 
 // בחירה מהתפריט
-export async function handleMenuSelection(obj = null) {
+export async function handleMenuSelection(namePlayer , obj = null) {
 
     // if not obj player ..
     if (!obj) {
@@ -18,7 +18,7 @@ export async function handleMenuSelection(obj = null) {
     }
 
     // variable
-    let namePlayer;
+    
     let idPlayer;
     if (obj.idPlayer && obj.namePlayer) {
         idPlayer = obj['idPlayer'];
@@ -73,7 +73,7 @@ export async function handleMenuSelection(obj = null) {
 }
 
 export async function NamePlayer(name) {
-    let idPlayer = await searchNamePlayer(name);
+    let idPlayer = await searchNamePlayerS(name);
 
     if (!idPlayer) { // אם לא נמצא השם בשרת
         idPlayer = await initPlayer(name); // יצירה

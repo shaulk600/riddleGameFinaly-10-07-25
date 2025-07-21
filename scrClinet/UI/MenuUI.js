@@ -79,6 +79,7 @@ export function getNamePlayer() {
     do {
         name = displayNamePlayerMenu();
     } while (name === '');
+    return name;
 }
 // show selection if make another round
 export function makeAnotherRound() {
