@@ -4,13 +4,14 @@ import { handleMenuSelection } from "../services/menuService.js";
 
 // started of plane
 async function playGame() {
-    const obj = await handleMenuSelection();
+    let namePlayer = getNamePlayer()
+    const obj = await handleMenuSelection(namePlayer);
 
     // loop if make Another Round
     let flag = makeAnotherRound();
     while (flag) {
         let obj;
-        obj = await handleMenuSelection(obj); // obj = player
+        obj = await handleMenuSelection(namePlayer , obj); // obj = player
         flag = makeAnotherRound();
     }
 }

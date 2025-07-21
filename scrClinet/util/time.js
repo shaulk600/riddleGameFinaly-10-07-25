@@ -1,4 +1,4 @@
-import {updateTinePlayer } from "../services/playerService.js";
+import {updateTinePlayerS } from "../services/playerService.js";
 
 import { ask } from "./flowGameRiddle.js";
 
@@ -16,7 +16,7 @@ export async function game_UpdateTimeInPlayer(idPlayer, objRiddle, cb) {
             end: end
         }
 
-        const data = await updateTinePlayer(idPlayer, obj);
+        const data = await updateTinePlayerS(idPlayer, obj);
         // return data;
         return;
     } catch (Err) {
