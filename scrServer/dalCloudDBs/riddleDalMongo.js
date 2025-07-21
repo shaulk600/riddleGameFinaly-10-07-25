@@ -19,19 +19,19 @@ export async function getAllRiddleD() {
     }
 }
 
-// export async function getRiddleByIdD(id) {
-//     try {
-//         const db = await connect();
-//         const data = await db.collection(collectionName)
-//             .findOne({ _id: new ObjectId(id) })
-//             .toArray();
-//         return data;
-//     }
-//     catch (Err) {
-//         console.log('Err Server: --  file: riddleDalMongo -- function getRiddleByIdD = ', Err);
-//         return null;
-//     }
-// }
+export async function getRiddleByIdD(id) {
+    try {
+        const db = await connect();
+        const data = await db.collection(collectionName)
+            .findOne({ _id: new ObjectId(id) })
+            .toArray();
+        return data;
+    }
+    catch (Err) {
+        console.log('Err Server: --  file: riddleDalMongo -- function getRiddleByIdD = ', Err);
+        return null;
+    }
+}
 
 export async function initRiddleOneD(obj) {
     try {

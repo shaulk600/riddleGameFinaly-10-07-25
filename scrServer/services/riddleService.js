@@ -3,8 +3,8 @@
 // import Riddle from "../classs/riddleClass.js";
 
 //new function
-import { getAllRiddleD, initRiddleOneD } from "../dalCloudDBs/riddleDalMongo.js";
-// import { RiddleO } from "../classs/classForCloudeDB/riddleObjClass.js";
+import { getAllRiddleD, getRiddleByIdD , initRiddleOneD } from "../dalCloudDBs/riddleDalMongo.js";
+import { RiddleO } from "../classs/classForCloudeDB/riddleObjClass.js";
 
 export async function getRiddleRandomS() {
     try {
@@ -27,17 +27,19 @@ export async function getAllRiddleS() {
         return null;
     }
 }
-// export async function getRiddleByIdS(id) {
-//     try {
-//         const data = await getRiddleByIdD(id);
-//         const newObj = new RiddleO(data)
-//         return newObj;
-//     }
-//     catch (Err) {
-//         console.log('Err Server: --  file: riddleService -- function getRiddleByIdD = ', Err);
-//         return null;
-//     }
-// }
+
+export async function getRiddleByIdS(id) {
+    try {
+        const data = await getRiddleByIdD(id);
+        const newObj = new RiddleO(data)
+        return newObj;
+    }
+    catch (Err) {
+        console.log('Err Server: --  file: riddleService -- function getRiddleByIdD = ', Err);
+        return null;
+    }
+}
+
 export async function initRiddleOneS(dataToInputToInit) { // obj = שמגיע מהבקשה = request
     try {
         const newObj = {
