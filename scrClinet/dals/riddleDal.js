@@ -1,7 +1,7 @@
 
 const URL = "http://localhost:3000";
 
-export async function getRiddles() {
+export async function getAllRiddlesD() {
     try {
         const response = await fetch(`${URL}/riddle/get/all`, {
             headers: {
@@ -23,7 +23,7 @@ export async function getRiddles() {
     }
 }
 
-export async function getRiddleById(id) {
+export async function getRiddleByIdD(id) {
     try {
         const response = await fetch(`${URL}/riddle/get/id=${id}`, {
             headers: {
@@ -45,7 +45,7 @@ export async function getRiddleById(id) {
     }
 }
 
-export async function initRiddle(obj) {
+export async function initRiddleD(obj) {
     try {
         const response = await fetch(`${URL}/riddle/post/init`, {
             headers: {
@@ -68,7 +68,7 @@ export async function initRiddle(obj) {
     }
 }
 
-export async function UpdateRiddleById(id, obj) {
+export async function UpdateRiddleByIdD(id, obj) {
     try {
         const response = await fetch(`${URL}/riddle/update/id=${id}`, {
             headers: {
@@ -91,7 +91,7 @@ export async function UpdateRiddleById(id, obj) {
     }
 }
 
-export async function deleteRiddleById(id) {
+export async function deleteRiddleByIdD(id) {
     try {
         const response = await fetch(`${URL}/riddle/delete/id=${id}`, {
             headers: {
@@ -113,7 +113,7 @@ export async function deleteRiddleById(id) {
     }
 }
 
-export async function randomRiddle() { //צריך את זה ??
+export async function randomRiddleD() { 
     try {
         const response = await fetch(`${URL}/riddle/get/random`, {
             headers: {

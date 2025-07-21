@@ -1,10 +1,19 @@
-import { searchIfPlayerExist, getPlayerData, initPlayerD, updatePlayerData, deletePlayer } from "../dals/playerDal.js";
+import { searchIfPlayerExistD, getPlayerDataD, initPlayerD, updatePlayerDataD, deletePlayerD } from "../dals/playerDal.js";
 
+export async function getPlayerDataS() {
+    try {
+        return await getPlayerDataD();
+    } catch (Err) {
+        console.log('', Err);
+        return null;
+    }
 
-export async function searchNamePlayer(name) {
+}
+//getPlayerDataD
+export async function searchNamePlayerS(name) {
     try {
         // const name = displayNamePlayer()
-        const data = await searchIfPlayerExist(name);
+        const data = await searchIfPlayerExistD(name);
 
         if (data) {
             const idPlayer = data["id"];
@@ -15,17 +24,17 @@ export async function searchNamePlayer(name) {
             return null; // אם אין שחקן - החזר null
         }
     } catch (Err) {
-        console.log('player service - searchNamePlayer', Err);
+        console.log('player service - searchNamePlayerS', Err);
         return null;
     }
 }
-export async function initPlayer(name) {
+export async function initPlayerS(name) {
     try {
         //צריך לעשות מתודה שקובעת את "הזמן הטוב ביותר" בעידכון לשאול - אם הזמן החדש קצר מ"הזמן הטוב ביותר" - בשרת
         const obj = {
             user_name: name
         }
-        
+
         const data = await initPlayerD(obj);
         if (!data) {
             console.log('not created player');
@@ -36,38 +45,25 @@ export async function initPlayer(name) {
             return idPlayer;
         }
     } catch (Err) {
-        console.log('player service - initPlayerD', Err);
+        console.log('player service - initPlayerS', Err);
         return null;
     }
 }
 
-//לערוך גם את זה
-export async function game_UpdateTimeInPlayer(idPlayer, idRiddle, cb) {
+export async function updateTinePlayerS(id_player, obj) {
     try {
-        const start = returnTime();
-        await cb();
-        const end = returnTime();
-        const obj = {
-            id_riddle: idRiddle,
-            start: start,
-            end: end
-        }
-        const data = await updatePlayerData(id, obj);
-        return data;
-
+        return await updatePlayerDataD(id_player, obj);
     } catch (Err) {
-        console.log('player service - updateTimeInPlayer', Err);
+        console.log(' file: playerService  --  function: updateTinePlayerS', Err);
         return null;
     }
 }
-function returnTime() {
-    return new Date.now();
-}
+
 
 //עדיין לא מוכן
-export async function showAveragePlayer(id) { // לא טוב - להסתכל שוב
+export async function showAveragePlayerS(id) { // לא טוב - להסתכל שוב
     try {
-        const data = await getPlayerData(id);
+        const data = await getPlayerDataD(id);
         if (!data) {
             return null;
         }
@@ -81,9 +77,9 @@ export async function showAveragePlayer(id) { // לא טוב - להסתכל שו
 }
 
 // צריך להשלים
-export async function deletePlayer(id) {
+export async function deletePlayerS(id) {
     try {
-        const data = await deletePlayer(id);
+        const data = await deletePlayerD(id);
         if (!data) {
             console.log('not deleted player');
             return null;
@@ -92,7 +88,7 @@ export async function deletePlayer(id) {
             console.log('deleted player'); //לעשות גם שימחק הדאטה של הציוני שחקן - לעשות
         }
     } catch (Err) {
-        console.log('player service - deletePlayer ', Err);
+        console.log('player service - deletePlayerS ', Err);
         return null;
     }
 }

@@ -1,18 +1,18 @@
-import { getNamePlayer , makeAnotherRound } from "../UI/MenuUI.js";
+import { getNamePlayer, makeAnotherRound } from "../UI/MenuUI.js";
 
 import { handleMenuSelection } from "../services/menuService.js";
 
+// started of plane
+async function playGame() {
+    const obj = await handleMenuSelection();
 
-
-export async function playGame() {
-    const name = getNamePlayer();
-    const obj = await handleMenuSelection(name);
-    
-    //האם תרצה עוד סיבוב - חזרה בלופ
-    let flag = true;
+    // loop if make Another Round
+    let flag = makeAnotherRound();
     while (flag) {
-        const obj = await handleMenuSelection(name , obj); // obj = player
+        let obj;
+        obj = await handleMenuSelection(obj); // obj = player
         flag = makeAnotherRound();
     }
 }
 
+playGame();
