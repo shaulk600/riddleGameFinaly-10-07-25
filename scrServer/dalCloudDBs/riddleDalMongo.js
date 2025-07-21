@@ -19,19 +19,19 @@ export async function getAllRiddleD() {
     }
 }
 
-export async function getRiddleByIdD(id) {
-    try {
-        const db = await connect();
-        const data = await db.collection(collectionName)
-            .findOne({ _id: new ObjectId(id) })
-            .toArray();
-        return data;
-    }
-    catch (Err) {
-        console.log('Err Server: --  file: riddleDalMongo -- function getRiddleByIdD = ', Err);
-        return null;
-    }
-}
+// export async function getRiddleByIdD(id) {
+//     try {
+//         const db = await connect();
+//         const data = await db.collection(collectionName)
+//             .findOne({ _id: new ObjectId(id) })
+//             .toArray();
+//         return data;
+//     }
+//     catch (Err) {
+//         console.log('Err Server: --  file: riddleDalMongo -- function getRiddleByIdD = ', Err);
+//         return null;
+//     }
+// }
 
 export async function initRiddleOneD(obj) {
     try {
@@ -45,38 +45,38 @@ export async function initRiddleOneD(obj) {
     }
 }
 
-export async function updateRiddleByIdD(id, obj) {
-    try {
-        const db = await connect();
-        // סינון שדות שערכם null או undefined
-        const filteredObj = Object.fromEntries(
-            Object.entries(obj).filter(([_, value]) => value !== null && value !== undefined)
-        );
-        return await db.collection(collectionName)
-            .updateOne( 
-                { _id: new ObjectId(id) }, // if Id=object.id to browser
-                { $set: filteredObj },
-            );
-    }
-    catch (Err) {
-        console.log('Err Server: --  file: riddleDalMongo -- function updateRiddleByIdD = ', Err);
-        return null;
-    }
-}
+// export async function updateRiddleByIdD(id, obj) {
+//     try {
+//         const db = await connect();
+//         // סינון שדות שערכם null או undefined
+//         const filteredObj = Object.fromEntries(
+//             Object.entries(obj).filter(([_, value]) => value !== null && value !== undefined)
+//         );
+//         return await db.collection(collectionName)
+//             .updateOne( 
+//                 { _id: new ObjectId(id) }, // if Id=object.id to browser
+//                 { $set: filteredObj },
+//             );
+//     }
+//     catch (Err) {
+//         console.log('Err Server: --  file: riddleDalMongo -- function updateRiddleByIdD = ', Err);
+//         return null;
+//     }
+// }
 
-export async function deleteRiddleByIdD(id) {
-    try {
-        const db = await connect();
-        return await db.collection(collectionName)
-            .deleteOne(
-                { _id: new ObjectId(id) }
-            );
-    }
-    catch (Err) {
-        console.log('Err Server: --  file: riddleDalMongo -- function deleteRiddleByIdD = ', Err);
-        return null;
-    }
-}
+// export async function deleteRiddleByIdD(id) {
+//     try {
+//         const db = await connect();
+//         return await db.collection(collectionName)
+//             .deleteOne(
+//                 { _id: new ObjectId(id) }
+//             );
+//     }
+//     catch (Err) {
+//         console.log('Err Server: --  file: riddleDalMongo -- function deleteRiddleByIdD = ', Err);
+//         return null;
+//     }
+// }
 
 
 //תוספות

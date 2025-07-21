@@ -1,8 +1,9 @@
+//old function
 // import { createRiddleDB, getAllRiddle, getRiddleById, updateRiddleById, deleteRiddleById } from "../dals/riddleDal.js"; 
 // import Riddle from "../classs/riddleClass.js";
 
-//החשיבה : אם יוצרים קלאס - אז צריך service folder (and logic)
-import { getAllRiddleD, getRiddleByIdD, initRiddleOneD, updateRiddleByIdD, deleteRiddleByIdD } from "../dalCloudDBs/riddleDalMongo.js";
+//new function
+import { getAllRiddleD, initRiddleOneD } from "../dalCloudDBs/riddleDalMongo.js";
 // import { RiddleO } from "../classs/classForCloudeDB/riddleObjClass.js";
 
 export async function getRiddleRandomS() {
