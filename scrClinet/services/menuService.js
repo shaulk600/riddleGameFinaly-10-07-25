@@ -18,7 +18,7 @@ export async function handleMenuSelection(namePlayer , obj = null) {
     }
 
     // variable
-    let namePlayer;
+    
     let idPlayer;
     if (obj.idPlayer && obj.namePlayer) {
         idPlayer = obj['idPlayer'];
