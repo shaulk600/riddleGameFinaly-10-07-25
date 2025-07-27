@@ -6,3 +6,6 @@ export async function validPlayerO(obj) { // Riddle Obj
         return true;
     }
 }
+
+// בדבר הזה אתה אמור לדעת מה התקבל - במידה והתקבל משהו שגוי לעשות res.status לטפל בזה פה
+// אם תרצה בנוסף - לעשות איזשהו וולידציה פנימית לערכים שיוצאים - בכיף

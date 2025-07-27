@@ -4,27 +4,26 @@ export async function getPlayerDataS() {
     try {
         return await getPlayerDataD();
     } catch (Err) {
-        console.log('', Err);
+        console.log('loggin Error: file: playerService, function: getPlayerDataS - ', Err);
         return null;
     }
 
 }
 //getPlayerDataD
-export async function searchNamePlayerS(name) {
+export async function searchNamePlayerS(user_name) {
     try {
-        // const name = displayNamePlayer()
-        const data = await searchIfPlayerExistD(name);
+        const data = await searchIfPlayerExistD(user_name);
 
         if (data) {
-            const idPlayer = data["id"];
-            return idPlayer;
+            const  players_id  = data["players_id"]; 
+            return players_id;
         }
         else {
             console.log('not player exist');
-            return null; // אם אין שחקן - החזר null
+            return null;
         }
-    } catch (Err) {
-        console.log('player service - searchNamePlayerS', Err);
+    } catch (err) {
+        console.log('logging error: file: playerService, function: searchNamePlayerS', err);
         return null;
     }
 }

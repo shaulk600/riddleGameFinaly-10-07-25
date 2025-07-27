@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { config } from "dotenv";
-config();
+config({ path: '../.env' });
 
 //create a single supabase clinet for interacting with your database
 
