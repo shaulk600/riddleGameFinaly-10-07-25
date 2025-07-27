@@ -10,7 +10,7 @@ import { randomGame } from "../util/flowGameRiddle.js";
 // הוא זה שמקשר בין ה UI לבין ה service 
 
 // בחירה מהתפריט
-export async function handleMenuSelection(namePlayer , obj = null) {
+export async function handleMenuSelection(namePlayer, obj = null) {
 
     // if not obj player ..
     if (!obj) {
@@ -18,7 +18,7 @@ export async function handleMenuSelection(namePlayer , obj = null) {
     }
 
     // variable
-    
+
     let idPlayer;
     if (obj.idPlayer && obj.namePlayer) {
         idPlayer = obj['idPlayer'];
@@ -73,21 +73,30 @@ export async function handleMenuSelection(namePlayer , obj = null) {
 }
 
 export async function NamePlayer(name) {
-    let idPlayer = await searchNamePlayerS(name);
+    try {
+        let idPlayer = await searchNamePlayerS(name);
 
-    if (!idPlayer) { // אם לא נמצא השם בשרת
-        idPlayer = await initPlayer(name); // יצירה
-        if (!idPlayer) { // אם משהו התפקשש שם
-            console.log(' !! An error occurred during execution - forwarded to the main !!');
-            return null;
+        if (!idPlayer) { // if not exist
+            idPlayer = await initPlayerS(name); // init player
+            
+            if (!idPlayer) { //if error ..
+                console.log(' !! An error occurred during execution - forwarded to the main !!');
+                return null;
+            }
+
         }
-    }
 
-    const objPlayer = {
-        idPlayer: idPlayer,
-        namePlayer: name
+        const objPlayer = {
+            idPlayer: idPlayer,
+            namePlayer: name
+        }
+
+        return objPlayer;
+
+    } catch (Err) {
+        console.log('Error: error to create name player in file: MenuService -- function: namePlayer ', Err);
+        return null;
     }
-    return objPlayer;
 }
 
 

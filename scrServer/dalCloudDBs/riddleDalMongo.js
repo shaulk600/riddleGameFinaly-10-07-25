@@ -20,10 +20,11 @@ export async function getAllRiddleD() {
 }
 
 export async function getRiddleByIdD(id) {
+    let id_get = id;
     try {
         const db = await connect();
         const data = await db.collection(collectionName)
-            .findOne({ _id: new ObjectId(id) })
+            .findOne({ _id: new ObjectId(id_get) })
             .toArray();
         return data;
     }
@@ -45,38 +46,40 @@ export async function initRiddleOneD(obj) {
     }
 }
 
-// export async function updateRiddleByIdD(id, obj) {
-//     try {
-//         const db = await connect();
-//         // סינון שדות שערכם null או undefined
-//         const filteredObj = Object.fromEntries(
-//             Object.entries(obj).filter(([_, value]) => value !== null && value !== undefined)
-//         );
-//         return await db.collection(collectionName)
-//             .updateOne( 
-//                 { _id: new ObjectId(id) }, // if Id=object.id to browser
-//                 { $set: filteredObj },
-//             );
-//     }
-//     catch (Err) {
-//         console.log('Err Server: --  file: riddleDalMongo -- function updateRiddleByIdD = ', Err);
-//         return null;
-//     }
-// }
+export async function updateRiddleByIdD(id, obj) {
+    let id_update = id
+    try {
+        const db = await connect();
+        // sorted: null or undefine
+        const filteredObj = Object.fromEntries(
+            Object.entries(obj).filter(([_, value]) => value !== null && value !== undefined)
+        );
+        return await db.collection(collectionName)
+            .updateOne(
+                { _id: new ObjectId(id_update) }, // if Id=object.id to browser
+                { $set: filteredObj },
+            );
+    }
+    catch (Err) {
+        console.log('Err Server: --  file: riddleDalMongo -- function updateRiddleByIdD = ', Err);
+        return null;
+    }
+}
 
-// export async function deleteRiddleByIdD(id) {
-//     try {
-//         const db = await connect();
-//         return await db.collection(collectionName)
-//             .deleteOne(
-//                 { _id: new ObjectId(id) }
-//             );
-//     }
-//     catch (Err) {
-//         console.log('Err Server: --  file: riddleDalMongo -- function deleteRiddleByIdD = ', Err);
-//         return null;
-//     }
-// }
+export async function deleteRiddleByIdD(id) {
+    let id_delete = id;
+    try {
+        const db = await connect();
+        return await db.collection(collectionName)
+            .deleteOne(
+                { _id: new ObjectId(id_delete) }
+            );
+    }
+    catch (Err) {
+        console.log('Err Server: --  file: riddleDalMongo -- function deleteRiddleByIdD = ', Err);
+        return null;
+    }
+}
 
 
 //תוספות
