@@ -5,14 +5,14 @@ const URL = "http://localhost:3000";
 
 export async function searchIfPlayerExistD(name) { // בודק אם קיים שחקן במאגר
     try {
-        const response = await fetch(`${URL}/player/get/playerExist/${name}`, {
+        const response = await fetch(`${URL}/player/player/user_name = ${name}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
             method: 'GET'
         });
         const data = await response.json();
-        if (response.status === 201) {
+        if (response.status === 200) {
             return data;
         }
         else {
@@ -28,7 +28,7 @@ export async function searchIfPlayerExistD(name) { // בודק אם קיים ש�
 //לערוך את זה שיוציא גם שחקן ועוד מתודה להוציא את ציוניו - שיעשו חיפוש בשרת על השחקן - לא כאן
 export async function getPlayerDataD(id) { // מביא נתוני שחקן במאגר - מתוכם להוציא average and sum
     try {
-        const response = await fetch(`${URL}/player/get/playerData/${id}`, {
+        const response = await fetch(`${URL}/player/playerData/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -50,7 +50,7 @@ export async function getPlayerDataD(id) { // מביא נתוני שחקן במ�
 
 export async function initPlayerD(obj) { //יוצר שחקן = obj = name , את כל הייתר ליצור בשרת
     try {
-        const response = await fetch(`${URL}/player/post/init`, {
+        const response = await fetch(`${URL}/player/`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -71,14 +71,14 @@ export async function initPlayerD(obj) { //יוצר שחקן = obj = name , את
     }
 }
 
-// יש צורך בעריכה
-export async function updatePlayerDataD(id, obj) { // בסוף כל שאלה- זה ישלח ובו ציוני השעה וכדומה 
+
+export async function updatePlayerDataD(id, obj) {
     try {
-        const response = await fetch(`${URL}/player/update/playerDataDate/${id}`, {
+        const response = await fetch(`${URL}/player/submit-score/user_name = ${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
-            method: 'PUT',
+            method: 'POST',
             body: JSON.stringify(obj)
         });
         const data = await response.json();
@@ -95,9 +95,10 @@ export async function updatePlayerDataD(id, obj) { // בסוף כל שאלה- ז
     }
 }
 
-export async function deletePlayerD(id) { // מוחק שחקן עפ"י ID
+// not route connected !!
+export async function deletePlayerD(id) { 
     try {
-        const response = await fetch(`${URL}/player/delete/allPlayer/${id}`, {
+        const response = await fetch(`${URL}/player/delete/allPlayer/user_name = ${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -113,6 +114,33 @@ export async function deletePlayerD(id) { // מוחק שחקן עפ"י ID
         }
     } catch (Err) {
         console.log('Error: playerDal.js - deletePlayer: ', Err);
+        return null;
+    }
+}
+
+/**
+ * a function to returned all result Time is anser to riddles
+ * @param {Object} player_id 
+ * @returns {Array} 
+ */
+export async function getAllResultTime(id) { // מוחק שחקן עפ"י ID
+    try {
+        const response = await fetch(`${URL}/player/leaderboard/user_name = ${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'GET',
+        });
+        const data = await response.json();
+        if (response.status === 200) {
+            return data;
+        }
+        else {
+            console.log('Error = STATUS');
+            return null;
+        }
+    } catch (Err) {
+        console.log('Error: playerDal.js - getAllResultTime: ', Err);
         return null;
     }
 }
