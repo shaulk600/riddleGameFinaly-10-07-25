@@ -1,7 +1,7 @@
 // התקן ספריות mongodb , dotenv
-import { config } from "dotenv";
-config();
 import { MongoClient , Db} from "mongodb";
+import { config } from "dotenv";
+config({ path: '../.env' });
 
 const clinet =  new MongoClient(process.env.DB_CONNECTION_MONGO || "mongodb+srv://shaullk600:AAAAWEFGETGHRT@cluster0.c6nsnbj.mongodb.net/");
 const DBNAME = process.env.DB_MONGO_DB_NAME || "RiddleGame";

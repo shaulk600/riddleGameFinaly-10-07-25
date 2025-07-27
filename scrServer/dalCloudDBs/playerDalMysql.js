@@ -8,20 +8,25 @@ import { supabase } from "../dbConfig/MySql.js";
  */
 //אמור להביא לי גם id וגם את כל פרטיו - בסרוויס אני אמור לטפל בזה
 export async function getPlayerByNameD(user_name) {
+    console.log(`--------------- dal`);
+    console.log(`function: getPlayerByNameD`);
     try {
         const { data, err } = await supabase
-            .from('player')
+            .from('players')
             .select('*')
             .eq('user_name', user_name)
             .limit(1);
 
 
         if (data) {
-            console.log(`test : data is: ${data}`);
+            console.log(`function: getPlayerByNameD => data`);
+            console.log(`--------------`);
+            console.log(`data:  ${data}`);
+            console.log(`--------------`);
             return data;
         }
         if (err) {
-            console.log('Error:  -- getPlayerByNameD');
+            console.log(`function: getPlayerByNameD => error`);
             return null;
         }
     }
@@ -39,10 +44,10 @@ export async function getPlayerByNameD(user_name) {
 export async function initPlayerD(obj) {
     try {
         const { user_name } = obj.user_name;
-        const d = new Date.now();
+        const d = Date.now();
 
         const { data, err } = await supabase
-            .from('player')
+            .from('players')
             .insert([
                 { user_name: user_name, created_at: d, best_Time: 0 }
             ]);
@@ -70,7 +75,7 @@ export async function updateTimePlayerD(obj) {
     try {
         const { user_name, best_Time } = obj.user_name;
         const { data, err } = await supabase
-            .from('player')
+            .from('players')
             .update({ best_Time: best_Time })
             .eq('user_name', user_name);
 

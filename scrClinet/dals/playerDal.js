@@ -3,15 +3,16 @@
 const URL = "http://localhost:3000";
 
 
-export async function searchIfPlayerExistD(name) { // בודק אם קיים שחקן במאגר
+export async function searchIfPlayerExistD(user_name) { // בודק אם קיים שחקן במאגר
     try {
-        const response = await fetch(`${URL}/player/player/user_name = ${name}`, {
+        const response = await fetch(`${URL}/player/player/user_name = ${user_name}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
             method: 'GET'
         });
         const data = await response.json();
+        console.log(`function searchIfPlayerExistD: data: ${data}`);
         if (response.status === 200) {
             return data;
         }
@@ -19,8 +20,8 @@ export async function searchIfPlayerExistD(name) { // בודק אם קיים ש�
             console.log('Error = STATUS');
             return null;
         }
-    } catch (Err) {
-        console.log('Error:  file: playerDal.js  -- function: searchIfPlayerExist: ', Err);
+    } catch (err) {
+        console.log('logging error:  file: playerDal, function: searchIfPlayerExist: ', err);
         return null;
     }
 }
@@ -28,7 +29,7 @@ export async function searchIfPlayerExistD(name) { // בודק אם קיים ש�
 //לערוך את זה שיוציא גם שחקן ועוד מתודה להוציא את ציוניו - שיעשו חיפוש בשרת על השחקן - לא כאן
 export async function getPlayerDataD(id) { // מביא נתוני שחקן במאגר - מתוכם להוציא average and sum
     try {
-        const response = await fetch(`${URL}/player/playerData/${id}`, {
+        const response = await fetch(`${URL}/player/playerData/players_id = ${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -71,10 +72,15 @@ export async function initPlayerD(obj) { //יוצר שחקן = obj = name , את
     }
 }
 
-
+/**
+ * a function that update score of player by players_id
+ * @param {*} id 
+ * @param {*} obj 
+ * @returns 
+ */
 export async function updatePlayerDataD(id, obj) {
     try {
-        const response = await fetch(`${URL}/player/submit-score/user_name = ${id}`, {
+        const response = await fetch(`${URL}/player/submit-score/players_id = ${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -96,9 +102,9 @@ export async function updatePlayerDataD(id, obj) {
 }
 
 // not route connected !!
-export async function deletePlayerD(id) { 
+export async function deletePlayerD(id) {
     try {
-        const response = await fetch(`${URL}/player/delete/allPlayer/user_name = ${id}`, {
+        const response = await fetch(`${URL}/player/delete/allPlayer/players_id = ${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -125,7 +131,7 @@ export async function deletePlayerD(id) {
  */
 export async function getAllResultTime(id) { // מוחק שחקן עפ"י ID
     try {
-        const response = await fetch(`${URL}/player/leaderboard/user_name = ${id}`, {
+        const response = await fetch(`${URL}/player/leaderboard/players_id = ${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },

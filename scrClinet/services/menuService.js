@@ -5,36 +5,33 @@ import { searchNamePlayerS, initPlayerS } from "./playerService.js";
 import { getRiddleRandomS, initRiddleS, getAllRiddlesS, updateRiddleByIdS, deleteRiddleByIdS } from "./riddleService.js";
 
 import { randomGame } from "../util/flowGameRiddle.js";
-// מקושר אל programManager
+// is file is connected betwwn UI file and Service file
 
-// הוא זה שמקשר בין ה UI לבין ה service 
 
-// בחירה מהתפריט
-export async function handleMenuSelection(namePlayer, obj = null) {
+/**
+ * a function that select from Menu
+ * @param {String} user_name 
+ * @param {Object} players_obj 
+ */
+export async function handleMenuSelection(name, players_obj = {}) {
 
     // if not obj player ..
-    if (!obj) {
-        obj = await NamePlayer(namePlayer);
-    }
-
-    // variable
-
-    let idPlayer;
-    if (obj.idPlayer && obj.namePlayer) {
-        idPlayer = obj['idPlayer'];
-        namePlayer = obj['namePlayer'];
+    let players_new_obj = {}
+    if (!players_obj.players_id) {
+        const { players_id, user_name } = await NamePlayer(name);
+        players_new_obj = { players_id, user_name };
     }
     //defult
     else {
-        obj = {
-            idPlayer: null,
-            namePlayer: null
+        players_new_obj = {
+            players_id: null,
+            user_name: null
         }
     }
 
     // programing dizain
     clearUI(); //clear menu
-    displayNamePlayer(namePlayer); // show name player
+    displayNamePlayer(user_name); // show name player
     const valueCoice = getMainMenuChoice(); // selection of menu
     if (valueCoice !== Number) { throw new Error() }
 
@@ -68,33 +65,41 @@ export async function handleMenuSelection(namePlayer, obj = null) {
         default:
             break;
     }
+    return players_new_obj;
 
     //מתודה שאמורה לעדכן את השעות של השחקן - במידה והיו - או בסיום 1
 }
 
+/**
+ * a function to get players_id create Object to while gameing
+ * @param {*} name 
+ * @returns 
+ */
 export async function NamePlayer(name) {
     try {
-        let idPlayer = await searchNamePlayerS(name);
+        //get id name player ..
+        const { players_id } = await searchNamePlayerS(name);
+        console.log(players_id);
+        const user_name = name;
 
-        if (!idPlayer) { // if not exist
-            idPlayer = await initPlayerS(name); // init player
-            
-            if (!idPlayer) { //if error ..
-                console.log(' !! An error occurred during execution - forwarded to the main !!');
-                return null;
-            }
-
+        //זה צריך להיות "תביא לי את ID - כל היצירה זה בשרת"
+        // if (!player_id) { // if not exist
+        //     player_id = await initPlayerS(name); // init player
+        if (!players_id) { //if error ..
+            console.log(' message Error clinet: An error occurred during execution - forwarded to the main !!');
+            return null;
         }
+        // }
 
+        //create obj
         const objPlayer = {
-            idPlayer: idPlayer,
-            namePlayer: name
+            players_id: Number(players_id),
+            user_name: String(user_name)
         }
-
         return objPlayer;
 
     } catch (Err) {
-        console.log('Error: error to create name player in file: MenuService -- function: namePlayer ', Err);
+        console.log('logging error: size:clinet, file: MenuService.js, function: namePlayer: ', Err);
         return null;
     }
 }

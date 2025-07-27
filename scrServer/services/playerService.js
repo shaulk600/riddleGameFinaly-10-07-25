@@ -13,14 +13,20 @@ import { getPlayerByNameD, initPlayerD, updateTimePlayerD, updateSubmitScoreD, g
  * @returns {Object} obj
  */
 async function getDataPlayer(user_name) {
+    console.log(`--------------- service`);
+    console.log(`function: getDataPlayer`);
     try {
         const res = await getPlayerByNameD(user_name);
         console.log(`test: to response: ${res}`);
         if (!res) {
             return null;
+
+            console.log(`--------------- end service => null`);
         }
         else {
             return res;
+
+            console.log(`--------------- end service => res`);
         }
     }
     catch (err) {
@@ -36,6 +42,7 @@ async function getDataPlayer(user_name) {
  */
 function validationToGeting(data) {
     try {
+        console.log('----- validationToGeting');
         console.log(`test: data ${data}`);
 
         const { player_id, user_name, created_at, best_Time } = data;
@@ -58,14 +65,17 @@ function validationToGeting(data) {
  */
 function validationToInit(data) {
     const { user_name } = data;
+
+    console.log('----validationToInit');
     console.log('test: ' + user_name);
+
     if (!user_name || user_name === undefined) {
         return false;
     }
     return true;
 }
 
-//exporting: הנוסח הוא player_id
+//method to exporting: 
 
 export async function getIdPlayerS(user_name) {
     try {
@@ -93,21 +103,66 @@ export async function getDataPlayerS(user_nameP) {
     //תביא את כל הפרטים שלו
     try {
         const data = await getDataPlayer(user_nameP);
+        console.log(`---  getDataPlayerS  -`);
         console.log(`test: to data ${data}`);
+
         if (!data) {
+            console.log(`test: null`);
+            console.log(`test: -------`);
             return null;
         }
         else {
+            console.log(`test: not null`);
+            console.log(`--data : ${data['players_id']}`);
+
             const f = validationToGeting();
             if (f) {
+                console.log(`test: validation seccess`);
+                console.log(`test: -------`);
                 return data;
             }
+            console.log(`test: not null and error -- check`);
+            console.log(`test: -------`);
             return null;
         }
 
     }
     catch (err) {
         console.log(`loggin error: file: playerService , function: getDataPlayerByNameS , Error: ${err}`);
+        return null;
+    }
+}
+
+/**
+ * a function that geting player if exist
+ * @param {String} user_name 
+ * @returns {Object} id player
+ */
+export async function getPlayerExistS(user_name) {
+    console.log(`--------------- service`);
+    console.log(`function: getPlayerExistS`);
+    
+    try {
+        console.log(`before send: user_name: ${user_name}`);
+        
+        let data = await getDataPlayerS(user_name);
+        
+        console.log(`after send: data: ${data}`);
+
+        if (!data) {
+            console.log(`!data `);
+            console.log(`before send: user_name: ${user_name}`);
+            
+            data = await initPlayerS({ user_name });
+            
+            console.log(`after send: data: ${data}`);
+            
+            const id = data.players_id
+            return id;
+        }
+    }
+    catch (err) {
+        console.log(`loggin error: file: playerService , function: getPlayerExistS , Error: ${err}`);
         return null;
     }
 }
@@ -139,10 +194,10 @@ export async function initPlayerS(obj) {
 export async function updateSubmitScoresS(user_name, obj) {
     try {
         const objPlayer = await getDataPlayerS(user_name); // inclode val
-        
+
         const { player_id, best_Time } = objPlayer;
         const { riddle_id, time_to_solve } = obj;
-        
+
         if (time_to_solve < best_Time) {
             best_Time = time_to_solve;
             // best_Time- לעדכן את ה בתוך הDB
@@ -171,8 +226,8 @@ export async function updateSubmitScoresS(user_name, obj) {
  */
 export async function getPlayerScoreByIdPlayerS(user_name) {
     try {
-        const objPlayer = await getDataPlayerS(user_name); 
-        const {player_id} = objPlayer;
+        const objPlayer = await getDataPlayerS(user_name);
+        const { player_id } = objPlayer;
 
         const data = getSubmitScoreByIdPlayerD(player_id);
         //אם זה מערך יהיה בדיקה אם הוחזר מערך
