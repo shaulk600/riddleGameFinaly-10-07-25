@@ -16,4 +16,4 @@ async function playGame() {
     }
 }
 
-playGame();
+export {playGame};

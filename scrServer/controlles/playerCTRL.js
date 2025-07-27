@@ -4,7 +4,7 @@ import { getPlayerByNameS } from "../services/playerService.js";
 
 export async function getPlayerByNameC(req, res) {
     try {
-        const user_name = req.params['name'];
+        const user_name = req.params['user_name'];
         const data = await getPlayerByNameS(user_name);
         if (!data) {
             console.log("");
