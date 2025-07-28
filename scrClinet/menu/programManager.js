@@ -11,7 +11,7 @@ async function playGame() {
     let flag = makeAnotherRound();
     while (flag) {
         let obj;
-        obj = await handleMenuSelection(user_name , obj); // obj = player
+        obj = await handleMenuSelection(user_name); // obj = player
         flag = makeAnotherRound();
     }
 }

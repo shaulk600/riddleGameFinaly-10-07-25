@@ -6,32 +6,21 @@ import { supabase } from "../dbConfig/MySql.js";
  * @param {string} userName 
  * @returns {object}  player = {,id , user_name , created_at ,best_Time}
  */
-//אמור להביא לי גם id וגם את כל פרטיו - בסרוויס אני אמור לטפל בזה
 export async function getPlayerByNameD(user_name) {
-    console.log(`--------------- dal`);
-    console.log(`function: getPlayerByNameD`);
     try {
         const { data, err } = await supabase
             .from('players')
             .select('*')
-            .eq('user_name', user_name)
-            .limit(1);
-
-
+            .eq('user_name', user_name);
         if (data) {
-            console.log(`function: getPlayerByNameD => data`);
-            console.log(`--------------`);
-            console.log(`data:  ${data}`);
-            console.log(`--------------`);
             return data;
         }
         if (err) {
-            console.log(`function: getPlayerByNameD => error`);
             return null;
         }
     }
-    catch (Err) {
-        console.log('Err Server: --  file: playerDalMysql -- function getAllPlayerD = ', Err);
+    catch (err) {
+        console.log('error: file: playerDalMysql, function: getPlayerByNameD: ', err);
         return null;
     }
 }

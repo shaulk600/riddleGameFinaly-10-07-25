@@ -1,10 +1,10 @@
 import express from "express";
-import { getPlayerExistS, getDataPlayerS, initPlayerS, getPlayerScoreByIdPlayerS } from "../services/playerService.js";
+import { getPlayerD, getDataPlayerS, initPlayerS, getPlayerScoreByIdPlayerS } from "../services/playerService.js";
 
 export async function getPlayerExist(req,res){
     try {
         const user_name = req.params['user_name'];
-        const data = await getPlayerExistS(user_name);
+        const data = await getPlayerD(user_name);
         if (!data) {
             console.log(`test to CTRL exist player : !data`);
             res.sendStatus(502);
@@ -25,7 +25,7 @@ export async function getPlayerExist(req,res){
 export async function getPlayerC(req, res) {
     try {
         const user_name = req.params['user_name'];
-        const data = await getDataPlayerS(user_name);
+        const data = await getPlayerD(user_name);
         if (!data) {
             console.log(`test to CTRL player : !data`);
             res.sendStatus(502);
