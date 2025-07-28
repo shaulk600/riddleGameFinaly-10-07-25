@@ -11,7 +11,7 @@ router.post('/submit-score/:user_name', submitScoreC);
 router.get('/leaderboard/:user_name', leaderboardC); //החזרת לוח תוצאות לפי הזמן 
 
 router.use(() => {
-    res.status(404).jso({ msg: 'path not found' })
+    res.status(404).jso({ msg: 'path not found' });
 });
 
 export default router;

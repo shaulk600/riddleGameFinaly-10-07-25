@@ -13,60 +13,58 @@ import { randomGame } from "../util/flowGameRiddle.js";
  * @param {String} user_name 
  * @param {Object} players_obj 
  */
-export async function handleMenuSelection(name, players_obj = {}) {
+export async function handleMenuSelection(name) {
 
-    // if not obj player ..
-    let players_new_obj = {}
-    if (!players_obj.players_id) {
-        const { players_id, user_name } = await NamePlayer(name);
-        players_new_obj = { players_id, user_name };
-    }
-    //defult
-    else {
-        players_new_obj = {
-            players_id: null,
-            user_name: null
+    //או לעשות while פה כדי לקלוט את הplayer
+    // או לעשות מתודה של יציאה פה -ואז להעביר את הplayer הלאה
+
+    let player = await NamePlayer(name);
+
+    while (player) {
+        
+        // programing dizain
+        clearUI(); //clear menu
+        displayNamePlayer(user_name); // show name player
+        const valueCoice = getMainMenuChoice(); // selection of menu
+        if (valueCoice !== Number) { throw new Error() }
+
+        switch (valueCoice) {
+            case "1":
+                await randomGame() // randomal
+                break;
+
+            case "2":
+                await initRiddleS(); // תיצור חידה - אם הרבה - צריך ליצור 
+                break;
+
+            case "3":
+                const dataGetAll = await getAllRiddlesS(); //all riddles ./ S= services file / D= Dal file
+                console.log(dataGetAll);
+                break;
+
+            case "4":
+                const dataUpdate = await updateRiddleByIdS();
+                console.log(dataUpdate);
+                break;
+
+            case "5":
+                const dataDelete = deleteRiddleByIdS()
+                break;
+
+            case "6":
+                //לעשות " טבלת מובילים " של השחקנים
+                break;
+            case "7": // to exit
+                player = null;
+                break;
+
+
+            default:
+                
+                break;
         }
+
     }
-
-    // programing dizain
-    clearUI(); //clear menu
-    displayNamePlayer(user_name); // show name player
-    const valueCoice = getMainMenuChoice(); // selection of menu
-    if (valueCoice !== Number) { throw new Error() }
-
-    switch (valueCoice) {
-        case "1":
-            await randomGame() // randomal
-            break;
-
-        case "2":
-            await initRiddleS(); // תיצור חידה - אם הרבה - צריך ליצור 
-            break;
-
-        case "3":
-            const dataGetAll = await getAllRiddlesS(); //all riddles ./ S= services file / D= Dal file
-            console.log(dataGetAll);
-            break;
-
-        case "4":
-            const dataUpdate = await updateRiddleByIdS();
-            console.log(dataUpdate);
-            break;
-
-        case "5":
-            const dataDelete = deleteRiddleByIdS()
-            break;
-
-        case "6":
-            //לעשות " טבלת מובילים " של השחקנים
-            break;
-
-        default:
-            break;
-    }
-    return players_new_obj;
-
     //מתודה שאמורה לעדכן את השעות של השחקן - במידה והיו - או בסיום 1
 }
 

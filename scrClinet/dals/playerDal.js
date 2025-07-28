@@ -5,7 +5,7 @@ const URL = "http://localhost:3000";
 
 export async function searchIfPlayerExistD(user_name) { // בודק אם קיים שחקן במאגר
     try {
-        const response = await fetch(`${URL}/player/player/user_name = ${user_name}`, {
+        const response = await fetch(`${URL}/player/${user_name}`, {
             headers: {
                 'Content-Type': 'application/json',
             },

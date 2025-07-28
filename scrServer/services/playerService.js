@@ -1,39 +1,32 @@
 import { getPlayerByNameD, initPlayerD, updateTimePlayerD, updateSubmitScoreD, getSubmitScoreByIdPlayerD } from "../dalCloudDBs/playerDalMysql.js";
 
-// CREATE TABLE player_scores (
-//   id SERIAL PRIMARY KEY,
-//   player_id INT REFERENCES players(id),
-//   riddle_id TEXT,
-//   time_to_solve INT,
-//   solved_at TIMESTAMP DEFAULT NOW()
-
 /**
  * a function insided geting data to player by name
  * @param {String} user_name 
  * @returns {Object} obj
  */
-async function getDataPlayer(user_name) {
-    console.log(`--------------- service`);
-    console.log(`function: getDataPlayer`);
-    try {
-        const res = await getPlayerByNameD(user_name);
-        console.log(`test: to response: ${res}`);
-        if (!res) {
-            return null;
+// async function getDataPlayer(user_name) {
+//     console.log(`--------------- service`);
+//     console.log(`function: getDataPlayer`);
+//     try {
+//         const res = await getPlayerByNameD(user_name);
+//         console.log(`test: to response: ${res}`);
+//         if (!res) {
+//             return null;
 
-            console.log(`--------------- end service => null`);
-        }
-        else {
-            return res;
+//             console.log(`--------------- end service => null`);
+//         }
+//         else {
+//             return res;
 
-            console.log(`--------------- end service => res`);
-        }
-    }
-    catch (err) {
-        console.log(`loggin error: file: playerService , function: getPlayerByNameD , Error: ${err}`);
-        return null;
-    }
-}
+//             console.log(`--------------- end service => res`);
+//         }
+//     }
+//     catch (err) {
+//         console.log(`loggin error: file: playerService , function: getPlayerByNameD , Error: ${err}`);
+//         return null;
+//     }
+// }
 
 /**
  * 
@@ -77,9 +70,14 @@ function validationToInit(data) {
 
 //method to exporting: 
 
-export async function getIdPlayerS(user_name) {
+/**
+ * a function to return obj player by user name
+ * @param {*}  -user_name 
+ * @returns player obj 
+ */
+export async function getPlayerD(user_name) {
     try {
-        const data = await getDataPlayer(user_name);
+        const data = await getPlayerByNameD(user_name);
         console.log(`test: to data ${data}`);
         if (!data) {
             return null;
@@ -102,28 +100,28 @@ export async function getIdPlayerS(user_name) {
 export async function getDataPlayerS(user_nameP) {
     //תביא את כל הפרטים שלו
     try {
-        const data = await getDataPlayer(user_nameP);
-        console.log(`---  getDataPlayerS  -`);
-        console.log(`test: to data ${data}`);
+        const data = await getPlayerByNameD(user_nameP);
+        // console.log(`---  getDataPlayerS  -`);
+        // console.log(`test: to data ${data}`);
 
         if (!data) {
-            console.log(`test: null`);
-            console.log(`test: -------`);
+            // console.log(`test: null`);
+            // console.log(`test: -------`);
             return null;
         }
         else {
-            console.log(`test: not null`);
-            console.log(`--data : ${data['players_id']}`);
+            // console.log(`test: not null`);
+            // console.log(`--data : ${data['players_id']}`);
 
-            const f = validationToGeting();
-            if (f) {
-                console.log(`test: validation seccess`);
-                console.log(`test: -------`);
-                return data;
-            }
-            console.log(`test: not null and error -- check`);
-            console.log(`test: -------`);
-            return null;
+            // const f = validationToGeting();
+            // if (f) {
+            //     console.log(`test: validation seccess`);
+            //     console.log(`test: -------`);
+            return data;
+            // }
+            // console.log(`test: not null and error -- check`);
+            // console.log(`test: -------`);
+            // return null;
         }
 
     }
@@ -139,24 +137,24 @@ export async function getDataPlayerS(user_nameP) {
  * @returns {Object} id player
  */
 export async function getPlayerExistS(user_name) {
-    console.log(`--------------- service`);
-    console.log(`function: getPlayerExistS`);
-    
+    // console.log(`--------------- service`);
+    // console.log(`function: getPlayerExistS`);
+
     try {
-        console.log(`before send: user_name: ${user_name}`);
-        
-        let data = await getDataPlayerS(user_name);
-        
-        console.log(`after send: data: ${data}`);
+        // console.log(`before send: user_name: ${user_name}`);
+
+        // let data = await getDataPlayerS(user_name);
+
+        // console.log(`after send: data: ${data}`);
 
         if (!data) {
-            console.log(`!data `);
-            console.log(`before send: user_name: ${user_name}`);
-            
+            // console.log(`!data `);
+            // console.log(`before send: user_name: ${user_name}`);
+
             data = await initPlayerS({ user_name });
-            
+
             console.log(`after send: data: ${data}`);
-            
+
             const id = data.players_id
             return id;
         }
@@ -166,6 +164,8 @@ export async function getPlayerExistS(user_name) {
         return null;
     }
 }
+
+
 
 export async function initPlayerS(obj) {
     try {
@@ -184,7 +184,6 @@ export async function initPlayerS(obj) {
         return null;
     }
 }
-
 
 /**
  *  a function that updateing 'PlayerScore' by user_name
